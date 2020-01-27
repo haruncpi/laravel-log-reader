@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\File;
 
 class LogReaderController extends Controller
 {
+    public function getIndex()
+    {
+        return view('LaravelLogReader::index');
+    }
+
     public function getLogs(Request $request)
     {
         if ($request->has('date')) {
