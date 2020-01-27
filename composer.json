@@ -1,0 +1,43 @@
+{
+  "name": "Laravel-Log-Reader",
+  "description": "A simple and beautiful laravel log reader",
+  "license": "cc-by-4.0",
+  "keywords": [
+    "laravel",
+    "log",
+    "reader"
+  ],
+  "type": "library",
+  "authors": [
+    {
+      "name": "MD.HARUN-UR-RASHID",
+      "email": "harun.cox@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": ">=5.6",
+    "illuminate/support": "^5.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Haruncpi\\LaravelLogReader\\": "src"
+    }
+  },
+  "scripts": {
+    "phpunit": "phpunit"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Haruncpi\\LaravelLogReader\\ServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  }
+}
