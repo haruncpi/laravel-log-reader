@@ -334,13 +334,14 @@
                     url = '{{url('/admin/api/log-reader')}}?date=' + date
                 } else {
                     url = '{{url('/admin/api/log-reader')}}'
-                    $http.get(url)
-                        .success(function (data) {
-                            $scope.response = data;
-                            $scope.data = data.data;
-                            originalData = data.data;
-                        })
                 }
+
+                $http.get(url)
+                    .success(function (data) {
+                        $scope.response = data;
+                        $scope.data = data.data;
+                        originalData = data.data;
+                    })
             };
 
             $scope.init();
