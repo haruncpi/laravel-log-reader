@@ -260,7 +260,7 @@
     <div class="name">@{{ title }}</div>
     <div class="actions">
         <a class="btn" href="#" ng-click="clearAll()">Clear All</a>
-        <a class="btn" href="{{config('log-reader.admin_panel_path')}}">Goto Admin Panel</a>
+        <a class="btn" href="{{config('laravel-log-reader.admin_panel_path')}}">Goto Admin Panel</a>
         <a class="btn" href="https://laravelarticle.com/laravel-log-reader" title="Laravel Log Reader">Doc</a>
     </div>
 </header>
@@ -323,17 +323,16 @@
         var myApp = angular.module("myApp", []);
         myApp.controller("LogCtrl", function ($scope, $http) {
             $scope.title = "Log Reader";
-            $scope.selectedType = undefined
-
+            $scope.selectedType = undefined;
             $scope.logTypes = ['INFO', 'EMERGENCY', 'CRITICAL', 'ALERT', 'ERROR', 'WARNING', 'NOTICE', 'DEBUG'];
-
             var originalData = null;
+
             $scope.init = function (date) {
                 var url = '';
                 if (date !== '' && date !== undefined) {
-                    url = '{{url('/admin/api/log-reader')}}?date=' + date
+                    url = '{{url(config('laravel-log-reader.api_route_path'))}}?date=' + date
                 } else {
-                    url = '{{url('/admin/api/log-reader')}}'
+                    url = '{{url(config('laravel-log-reader.api_route_path'))}}'
                 }
 
                 $http.get(url)
@@ -349,19 +348,19 @@
             $scope.filterByType = function (tp) {
                 $scope.selectedType = tp
             };
+
             $scope.clearAll = function () {
                 if (confirm("Are you sure?")) {
-                    var url = '{{url('admin/log-reader')}}'
+                    var url = '{{url(config('laravel-log-reader.view_route_path'))}}'
                     $http.post(url, {'clear': true})
                         .success(function (data) {
                             if (data.success) {
-                                alert(data.message)
+                                alert(data.message);
                                 $scope.init();
                             }
                         })
                 }
             }
-
 
         })
     </script>
