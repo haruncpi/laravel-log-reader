@@ -31,8 +31,10 @@ class LaravelLogReader
         foreach ($files as $path) {
             $fileName = basename($path);
             preg_match('/(?<=laravel-)(.*)(?=.log)/', $fileName, $dtMatch);
-            $date = $dtMatch[0];
-            array_push($dates, $date);
+            if(isset($dtMatch[0])) {
+                $date = $dtMatch[0];
+                array_push($dates, $date);
+            }
         }
 
         return $dates;
