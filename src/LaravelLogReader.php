@@ -26,13 +26,18 @@ class LaravelLogReader
     public function getLogFileDates()
     {
         $dates = [];
+        $dtMatch = [];
         $files = glob(storage_path('logs/*.log'));
-        $files = array_reverse($files);
-        foreach ($files as $path) {
+        $log_files = array_reverse($files);
+
+        foreach ($log_files as $path) {
             $fileName = basename($path);
             preg_match('/(?<=laravel-)(.*)(?=.log)/', $fileName, $dtMatch);
-            $date = $dtMatch[0];
-            array_push($dates, $date);
+            if (isset($dtMatch[0])) 
+            {
+                $date = $dtMatch[0];
+                array_push($dates, $date);
+            }
         }
 
         return $dates;
@@ -46,7 +51,7 @@ class LaravelLogReader
         if (count($availableDates) == 0) {
             return response()->json([
                 'success' => false,
-                'message' => 'No log available'
+                'message' => trans('LaravelLogReader::laravel-log-reader.no_log')
             ]);
         }
 
@@ -58,7 +63,7 @@ class LaravelLogReader
         if (!in_array($configDate, $availableDates)) {
             return response()->json([
                 'success' => false,
-                'message' => 'No log file found with selected date ' . $configDate
+                'message' => trans('LaravelLogReader::laravel-log-reader.no_log_by_date') . $configDate
             ]);
         }
 
@@ -80,17 +85,22 @@ class LaravelLogReader
         }
 
         preg_match('/(?<=laravel-)(.*)(?=.log)/', $fileName, $dtMatch);
-        $date = $dtMatch[0];
-
+        
+        $date = '';
+        if (isset($dtMatch[0])) 
+        {
+            $date = $dtMatch[0];
+        }
+        
         $data = [
             'available_log_dates' => $availableDates,
             'date' => $date,
             'filename' => $fileName,
             'logs' => $logs
         ];
-
+        
         return response()->json(['success' => true, 'data' => $data]);
     }
 
-
 }
+
