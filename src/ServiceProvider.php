@@ -8,6 +8,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     const ROUTE_PATH = __DIR__ . '/../routes';
     const VIEW_PATH = __DIR__ . '/../views';
     const ASSET_PATH = __DIR__ . '/../assets';
+    const LANG_PATH = __DIR__ . '/../resources/lang';
 
     public function boot()
     {
@@ -17,6 +18,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
         $this->loadRoutesFrom(self::ROUTE_PATH . '/web.php');
         $this->loadViewsFrom(self::VIEW_PATH, 'LaravelLogReader');
+        $this->loadTranslationsFrom(self::LANG_PATH, 'LaravelLogReader');
     }
 
     public function register()
