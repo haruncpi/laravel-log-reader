@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Log Reader</title>
+    <title>{{ trans('LaravelLogReader::laravel-log-reader.title') }}</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 
@@ -259,9 +259,9 @@
 <header>
     <div class="name">@{{ title }}</div>
     <div class="actions">
-        <a class="btn" href="#" ng-click="clearAll()">Clear All</a>
-        <a class="btn" href="{{ route(config('laravel-log-reader.admin_panel_routh_name')) }}">Goto Admin Panel</a>
-        <a class="btn" href="https://laravelarticle.com/laravel-log-reader" title="Laravel Log Reader">Doc</a>
+        <a class="btn" href="#" ng-click="clearAll()">{{ trans('LaravelLogReader::laravel-log-reader.clear_all') }}</a>
+        <a class="btn" href="{{ route(config('laravel-log-reader.admin_panel_routh_name')) }}">{{ trans('LaravelLogReader::laravel-log-reader.goto_admin_panel') }}</a>
+        <a class="btn" href="https://laravelarticle.com/laravel-log-reader" title="{{ trans('LaravelLogReader::laravel-log-reader.package') }}">{{ trans('LaravelLogReader::laravel-log-reader.doc') }}</a>
     </div>
 </header>
 <section class="content">
@@ -269,7 +269,7 @@
         <div class="top_content_left">
             <div>
                 <p class="selected_date" style="font-size: 14px;"><strong>
-                        <span ng-show="response.success">Showing Logs: @{{data.date}}</span>
+                        <span ng-show="response.success">{{ trans('LaravelLogReader::laravel-log-reader.showing_logs') }}: @{{data.date}}</span>
                         <span ng-hide="response.success">@{{response.message}}</span>
                     </strong></p>
             </div>
@@ -322,7 +322,7 @@
     <script>
         var myApp = angular.module("myApp", []);
         myApp.controller("LogCtrl", function ($scope, $http) {
-            $scope.title = "Log Reader";
+            $scope.title = "{{ trans('LaravelLogReader::laravel-log-reader.title') }}";
             $scope.selectedType = undefined;
             $scope.logTypes = ['INFO', 'EMERGENCY', 'CRITICAL', 'ALERT', 'ERROR', 'WARNING', 'NOTICE', 'DEBUG'];
             var originalData = null;
@@ -350,7 +350,7 @@
             };
 
             $scope.clearAll = function () {
-                if (confirm("Are you sure?")) {
+                if (confirm("{{ trans('LaravelLogReader::laravel-log-reader.sure') }}")) {
                     var url = '{{url(config('laravel-log-reader.view_route_path'))}}'
                     $http.post(url, {'clear': true})
                         .success(function (data) {
