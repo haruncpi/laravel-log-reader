@@ -26,7 +26,7 @@ class LaravelLogReader
     public function getLogFileDates()
     {
         $dates = [];
-        $files = glob(storage_path('logs/*.log'));
+        $files = glob(storage_path('logs/laravel-*.log'));
         $files = array_reverse($files);
         foreach ($files as $path) {
             $fileName = basename($path);
@@ -91,6 +91,5 @@ class LaravelLogReader
 
         return response()->json(['success' => true, 'data' => $data]);
     }
-
 
 }

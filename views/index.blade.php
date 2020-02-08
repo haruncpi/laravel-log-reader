@@ -260,7 +260,7 @@
     <div class="name">@{{ title }}</div>
     <div class="actions">
         <a class="btn" href="#" ng-click="clearAll()">Clear All</a>
-        <a class="btn" href="{{config('laravel-log-reader.admin_panel_path')}}">Goto Admin Panel</a>
+        <a class="btn" href="{{url(config('laravel-log-reader.admin_panel_path'))}}">Goto Admin Panel</a>
         <a class="btn" href="https://laravelarticle.com/laravel-log-reader" title="Laravel Log Reader">Doc</a>
     </div>
 </header>
@@ -295,8 +295,6 @@
     </div>
 
     <div>
-
-
         <div class="responsive_table">
             <table>
                 <thead>
