@@ -1,5 +1,5 @@
 {
-  "name": "haruncpi/laravel-log-reader",
+  "name": "successdev/laravel-log-reader",
   "description": "A simple and beautiful laravel log reader",
   "license": "cc-by-4.0",
   "keywords": [
@@ -21,7 +21,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Haruncpi\\LaravelLogReader\\": "src"
+      "Successdev\\LaravelLogReader\\": "src"
     }
   },
   "scripts": {
@@ -30,7 +30,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Haruncpi\\LaravelLogReader\\ServiceProvider"
+        "Successdev\\LaravelLogReader\\ServiceProvider"
       ]
     }
   },
