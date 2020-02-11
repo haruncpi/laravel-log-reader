@@ -260,7 +260,7 @@
     <div class="name">@{{ title }}</div>
     <div class="actions">
         <a class="btn" href="#" ng-click="clearAll()">{{ trans('LaravelLogReader::laravel-log-reader.clear_all') }}</a>
-        <a class="btn" href="{{ route(config('laravel-log-reader.admin_panel_routh_name')) }}">{{ trans('LaravelLogReader::laravel-log-reader.goto_admin_panel') }}</a>
+        <a class="btn" href="{{ route(config('laravel-log-reader.admin_panel_route_name')) }}">{{ trans('LaravelLogReader::laravel-log-reader.goto_admin_panel') }}</a>
         <a class="btn" href="https://laravelarticle.com/laravel-log-reader" title="{{ trans('LaravelLogReader::laravel-log-reader.package') }}">{{ trans('LaravelLogReader::laravel-log-reader.doc') }}</a>
     </div>
 </header>
