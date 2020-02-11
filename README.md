@@ -13,3 +13,6 @@
 
 ## Documentation
 Get full documentation of [Laravel Log Reader](https://laravelarticle.com/laravel-log-reader)
+
+This is a forked version of the original package with translations
+
