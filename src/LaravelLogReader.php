@@ -4,7 +4,7 @@
  * Date: 25/01/2020
  * Website: laravelarticle.com
  */
-namespace Haruncpi\LaravelLogReader;
+namespace Successdev\LaravelLogReader;
 
 class LaravelLogReader
 {
