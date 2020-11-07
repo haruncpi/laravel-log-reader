@@ -4,11 +4,11 @@
  * Date: 25/01/2020
  * Website: laravelarticle.com
  */
+
 namespace Haruncpi\LaravelLogReader;
 
 class LaravelLogReader
 {
-    protected $final = [];
     protected $config = [];
 
 
@@ -62,20 +62,22 @@ class LaravelLogReader
             ]);
         }
 
-
-        $pattern = "/^\[(?<date>.*)\]\s(?<env>\w+)\.(?<type>\w+):(?<message>.*)/m";
-
         $fileName = 'laravel-' . $configDate . '.log';
         $content = file_get_contents(storage_path('logs/' . $fileName));
-        preg_match_all($pattern, $content, $matches, PREG_SET_ORDER, 0);
+
+        // splitting by regexp in order to get the whole message between 2 log entries
+        $chars = preg_split('/\[(?<date>.*)\]\s(?<env>\w+)\.(?<type>\w+):/i', $content, -1,
+            PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+        // chunking - every chung will contain all needed data
+        $matches = array_chunk($chars, 4, false);
 
         $logs = [];
-        foreach ($matches as $match) {
+        foreach ($matches as [$date, $env, $type, $message]) {
             $logs[] = [
-                'timestamp' => $match['date'],
-                'env' => $match['env'],
-                'type' => $match['type'],
-                'message' => trim($match['message'])
+                'timestamp' => $date,
+                'env' => $env,
+                'type' => $type,
+                'message' => trim($message),
             ];
         }
 
