@@ -41,7 +41,10 @@
             top: 0;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
         }
-
+        header .btn_clear_all {
+            background: #de4f4f;
+            color: #fff;
+        }
         header .name {
             font-size: 25px;
             font-weight: 500;
@@ -110,7 +113,9 @@
             border: 1px solid #e8e8e8;
             padding: 5px;
         }
-
+        table tr:hover {
+            background: #f4f4f4;
+        }
         thead tr td {
             background: #717171;
             color: #fff;
@@ -259,7 +264,7 @@
 <header>
     <div class="name">@{{ title }}</div>
     <div class="actions">
-        <a class="btn" href="#" ng-click="clearAll()">Clear All</a>
+        <a class="btn btn_clear_all" href="#" ng-click="clearAll()">Clear All</a>
         <a class="btn" href="{{url(config('laravel-log-reader.admin_panel_path'))}}">Goto Admin Panel</a>
         <a class="btn" href="https://laravelarticle.com/laravel-log-reader" title="Laravel Log Reader">Doc</a>
     </div>
