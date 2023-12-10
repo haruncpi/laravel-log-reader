@@ -134,6 +134,10 @@
             text-transform: uppercase;
         }
 
+        .angular-with-newlines {
+            white-space: pre-wrap;
+        }
+
         @media screen and (max-width: 700px) {
             .top_content {
                 flex-direction: column;
@@ -311,11 +315,19 @@
                 </tr>
                 </thead>
 
-                <tr ng-repeat="log in data.logs |filter: selectedType track by $index">
+                <tr ng-repeat="log in data.logs | filter: {type:selectedType} track by $index">
                     <td>@{{ log.timestamp }}</td>
-                    <td>@{{log.env}}</td>
+                    <td>@{{  log.env }}</td>
                     <td><span class="badge @{{ log.type.toLowerCase() }}">@{{ log.type }}</span></td>
-                    <td>@{{ log.message }}</td>
+                    <td>@{{ log.first_line }}
+                        <input type="button" value="Show Full Stack" ng-hide="!log.message || log.showStackTrace"
+                               ng-click="log.showStackTrace = true"/>
+                        <input type="button" value="Hide Full Stack" ng-show="log.message && log.showStackTrace"
+                               ng-click="log.showStackTrace = false"/>
+                        <div class="angular-with-newlines" ng-show="log.message && log.showStackTrace">@{{ log.message
+                            }}
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -340,6 +352,18 @@
 
                 $http.get(url)
                     .success(function (data) {
+                        data.data.logs.forEach(function (el) {
+                            el.showStackTrace = false;
+                            var firstBreakIndex = el.message.indexOf('\n');
+                            if (firstBreakIndex === -1) {
+                                el.first_line = el.message;
+                                el.message = undefined;
+                            } else {
+                                el.first_line = el.message.substr(0, firstBreakIndex + 1);
+                                el.message = el.message.substr(firstBreakIndex + 1);
+                            }
+                        });
+
                         $scope.response = data;
                         $scope.data = data.data;
                         originalData = data.data;
